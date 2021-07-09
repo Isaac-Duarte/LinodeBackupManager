@@ -86,7 +86,7 @@ namespace LinodeBackupManager
 
             try
             {
-                foreach (string file in Directory.GetFiles("tmp"))
+                foreach (string file in Directory.GetFiles("temp"))
                 {
                     File.Delete(file);
                     Log.Information($"Deleting file {file}");
@@ -97,7 +97,7 @@ namespace LinodeBackupManager
                 Log.Error($"Unhandled exception. {e.Message}");
             }
 
-            Directory.Delete("tmp");
+            Directory.Delete("temp");
 
             Log.Information("Done! Goodbye! :)");
         }
