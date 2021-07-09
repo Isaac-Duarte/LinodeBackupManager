@@ -82,7 +82,24 @@ namespace LinodeBackupManager
                 Log.Error($"Error while creating zip archive {keyNotFound.Message}");
             }
 
-            Log.Information("Done! Closing application");
+            Log.Information("Done uploading cleaning temp files.");
+
+            try
+            {
+                foreach (string file in Directory.GetFiles("tmp"))
+                {
+                    File.Delete(file);
+                    Log.Information($"Deleting file {file}");
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Unhandled exception. {e.Message}");
+            }
+
+            Directory.Delete("tmp");
+
+            Log.Information("Done! Goodbye! :)");
         }
     }
 }
